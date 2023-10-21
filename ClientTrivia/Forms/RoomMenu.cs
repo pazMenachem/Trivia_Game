@@ -98,6 +98,7 @@ namespace ClientTrivia
 
         private void RefreshRoomButton_Click(object sender, EventArgs e)
         {
+            RoomList.Rows.Clear();
             RefreshRoomList();
         }
     }
