@@ -74,34 +74,34 @@ void Communicator::closedSocketProt(const SOCKET& sock)
 
 	switch (handler->getType())
 	{
-	case HANDLER_LOGIN:
-	case HANDLER_MENU:
-		break;
-	case HANDLER_ROOM:
-	{
-		Room* room = dynamic_cast<RoomRequestHandler*>(handler.get())->getRoom();
-		int roomId = room->getRoomData()._id;
+		case HANDLER_LOGIN:
+		case HANDLER_MENU:
+			break;
+		case HANDLER_ROOM:
+		{
+			Room* room = dynamic_cast<RoomRequestHandler*>(handler.get())->getRoom();
+			int roomId = room->getRoomData()._id;
 
-		if (room->getRoomOwner() == playerName)
-			closeRoomProtcol(playerName, roomId);
-		else
-			leaveRoomProtocol(playerName, roomId);
-		break;
-	}
-	case HANDLER_GAME:
-	{
-		Game& game = dynamic_cast<GameRequestHandler*>(handler.get())->getGame();
-		int gameId = game.getGameId();
+			if (room->getRoomOwner() == playerName)
+				closeRoomProtcol(playerName, roomId);
+			else
+				leaveRoomProtocol(playerName, roomId);
+			break;
+		}
+		case HANDLER_GAME:
+		{
+			Game& game = dynamic_cast<GameRequestHandler*>(handler.get())->getGame();
+			int gameId = game.getGameId();
 
-		if (game.getGameOwner() == playerName)
-			closeGameProtocol(playerName, gameId);
-		else
-			leaveGameProtocol(playerName, gameId);
-		break;
-	}
-	default:
-		cout << __FUNCTION__ " Undefined handler type." << endl;
-		break;
+			if (game.getGameOwner() == playerName)
+				closeGameProtocol(playerName, gameId);
+			else
+				leaveGameProtocol(playerName, gameId);
+			break;
+		}
+		default:
+			cout << __FUNCTION__ " Undefined handler type." << endl;
+			break;
 	}
 	_reqHandlerFact.getLoginManager().logOut(playerName);
 }
@@ -266,7 +266,8 @@ void Communicator::communicateWithClient(SOCKET sock)
 	RequestData reqData(sock);
 	RequestResult reqRes;
 	DataSender dataSender(sock);
-	try 
+
+	try
 	{
 		while (true) 
 		{
@@ -290,7 +291,6 @@ void Communicator::communicateWithClient(SOCKET sock)
 					_clients[sock]->handleRequest(reqData, reqRes);
 				else
 					reqRes._resultCode = ERROR_CODE_NOT_RELEVANT;
-			
 			
 			// Move Client State
 			if (reqRes._resultCode == CODE_SUCCESS)
@@ -330,7 +330,7 @@ SOCKET Communicator::CreateNewClientSocket()
 	if (clientSocket == INVALID_SOCKET)
 		throw std::exception(__FUNCTION__);
 
-	cout << "New Client received - Socket number " << clientSocket << endl;
+	cout << "New Client received - Socket number " + to_string(clientSocket) << endl;
 
 	return clientSocket;
 }

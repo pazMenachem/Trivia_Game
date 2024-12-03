@@ -178,11 +178,9 @@ bool SqliteDataBase::addQuestionsToDB()
         sqlite3_bind_text(statment, 5, _questions[i]._answers[3].c_str(), -1, SQLITE_STATIC);
         sqlite3_bind_int(statment, 6, _questions[i]._correctAnswer);
 
-        if (sqlite3_step(statment) != SQLITE_DONE) {
-            continue; // Repeated question.
-            //checkForErrorMessage();
-            //return false;
-        }
+        if (sqlite3_step(statment) != SQLITE_DONE) 
+            continue;
+
         sqlite3_reset(statment);
     }
 
@@ -238,9 +236,9 @@ void SqliteDataBase::addTestInfo(int amount)
     string email;
 
     for (int i = 0; i < amount; ++i) {
-        username = "user" + to_string(i);
+        username = "user"     + to_string(i);
         password = "password" + to_string(i);
-        email = "user" + to_string(i) + "@example.com";
+        email    = "user"     + to_string(i) + "@example.com";
         if (!addNewUser(username, password, email)) {
             cout << "Test Rows already in DB" << endl;
             return;

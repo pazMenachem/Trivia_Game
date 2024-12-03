@@ -141,7 +141,8 @@ ehthumbs_vista.db
 
 ###   Misc    ###
 TriviaTesterV1.0.1.py
-
+ClientTrivia/obj/
+ClientTrivia/bin/
 .vs
 
 # End of https://www.toptal.com/developers/gitignore/api/c++,windows,visualbasic,visualstudiocode

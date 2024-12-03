@@ -84,13 +84,3 @@ SOCKET& LoginManager::getUserSocket(const string& userName)
 {
 	return _userNameSock.at(userName);
 }
-
-//vector<SOCKET>&& LoginManager::getSocketsToBroad(vector<string>& playerNames)
-//{
-//	vector<SOCKET> res;
-//	_loginLock.lock();
-//	for (auto& name : playerNames)
-//		res.push_back(_userNameSock.at(name));
-//	_loginLock.unlock();
-//	return move(res);
-//}

@@ -4,8 +4,6 @@
 
 
 class RequestHandlerFactory;
-class IRequestHandler;
-
 
 /**
  * @brief Result structure for request handling.

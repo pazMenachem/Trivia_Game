@@ -3,7 +3,6 @@
 void GameManager::CreateGame(Room& room)
 {
     auto&& questions = _db->getQuestions(room.getRoomData()._numOfQuestionsInGame);
-    // Need to check!
     _games.emplace(room.getRoomData()._id, Game(room, move(questions)));
 }
 
